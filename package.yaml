@@ -11,8 +11,26 @@ category:            Web
 extra-source-files:
 - README.md
 
+ghc-options:
+  - -fshow-hole-constraints
+  - -Wall
+  - -Wcompat
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  - -Wredundant-constraints
+  - -Wno-unticked-promoted-constructors
+
+
+default-extensions:
+  - OverloadedStrings
+  - StandaloneDeriving
+
 dependencies:
   - base >= 4.7 && < 5
+
+library:
+  source-dirs:
+    - exercises
 
 executables:
   thinking-with-types-ex:

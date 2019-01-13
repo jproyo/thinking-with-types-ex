@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ac112b3d79678afc252104eaaf21d52bba8d6d57c47ef7a1e73614c12ffadd5e
+-- hash: 2300a1c467bb472327b7c61b8121bfe03a10865f469e91de604244702f606d0d
 
 name:           thinking-with-types-ex
 version:        0.1.0.0
@@ -19,12 +19,25 @@ build-type:     Simple
 extra-source-files:
     README.md
 
+library
+  other-modules:
+      Paths_thinking_with_types_ex
+  hs-source-dirs:
+      exercises
+  default-extensions: OverloadedStrings StandaloneDeriving
+  ghc-options: -fshow-hole-constraints -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -Wno-unticked-promoted-constructors
+  build-depends:
+      base >=4.7 && <5
+  default-language: Haskell2010
+
 executable thinking-with-types-ex
   main-is: Main.hs
   other-modules:
       Paths_thinking_with_types_ex
   hs-source-dirs:
       src
+  default-extensions: OverloadedStrings StandaloneDeriving
+  ghc-options: -fshow-hole-constraints -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -Wno-unticked-promoted-constructors
   build-depends:
       base >=4.7 && <5
   default-language: Haskell2010
