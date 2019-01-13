@@ -28,23 +28,45 @@ hHead (t :# _) =t
 showBool :: HList '[_1, Bool, _2] -> String
 showBool( _ :# b :# _ :# HNil) = show b
 
+{-
 instance Eq (HList '[]) where
   HNil == HNil = True
 
 instance (Eq t, Eq (HList ts)) => Eq (HList (t ': ts)) where
   (a :# as) == (b :# bs) = a == b && as == bs
 
--- Exercise 5.3
+-- Exercise 5.3.i
 instance Ord (HList '[]) where
   compare HNil HNil = EQ
 
 instance (Ord t, Ord (HList ts)) => Ord (HList (t ': ts)) where
   (a :# as) <= (b :# bs) = a <= b && as <= bs 
 
+-- Exercise 5.3.ii
 instance Show (HList '[]) where
   show HNil = "HNil"
 
 instance (Show t, Show (HList ts)) => Show (HList (t ': ts)) where
   show (t :# ts) = show t <> " :# " <> show ts
+-}
 
+type family AllEq (ts :: [Type]) :: Constraint where
+  AllEq '[] = ()
+  AllEq (t ': ts) = (Eq t, AllEq ts)
 
+type family All (c :: Type -> Constraint) (ts :: [Type]) :: Constraint where
+  All c '[] = ()
+  All c (t ': ts) = (c t, All c ts)
+
+instance All Eq ts => Eq (HList ts) where
+  HNil == HNil = True
+  (a :# as) == (b :# bs) = a == b && as == bs
+
+-- Exercise 5.3.iii
+instance (All Eq ts, All Ord ts) => Ord (HList ts) where
+  HNil <= HNil = True
+  (a :# as) <= (b :# bs) = a <= b && as <= bs
+
+instance All Show ts => Show (HList ts) where
+  show HNil = "HNil"
+  show (a :# as) = show a <> " :# " <> show as
