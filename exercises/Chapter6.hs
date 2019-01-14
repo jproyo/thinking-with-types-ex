@@ -22,3 +22,7 @@ instance Functor Cont where
 instance Applicative Cont where
   pure a = Cont $ \callback -> callback a
   Cont f <*> Cont b = Cont $ \c -> f $ \d -> b (c . d)
+
+-- Exercise 6.4.iii
+instance Monad Cont where
+  Cont a >>= f = Cont $ \callback -> a $ \b -> unCont (f b) callback
