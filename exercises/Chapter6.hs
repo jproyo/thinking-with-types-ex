@@ -32,3 +32,10 @@ newtype ContT m a = ContT { runContT :: forall r. (a -> m r) -> m r }
 
 instance Functor (ContT m) where
   fmap f (ContT c) = ContT $ \callback -> c (callback . f)
+
+instance Applicative (ContT m) where
+  pure a = ContT $ \callback -> callback a
+  ContT f <*> ContT b = ContT $ \c -> f $ \d -> b (c . d)
+  
+instance Monad (ContT m) where
+  ContT a >>= f = ContT $ \callback -> a $ \b -> runContT (f b) callback 
