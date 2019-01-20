@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 842346d48254f7fcbe08e1e4e6051f382d8f72fbcbd6666f429d2406aed33ea2
+-- hash: 7209d1cf39120c058a8636f2c3184daa757219c417eee53f4e5cf5e269332227
 
 name:           thinking-with-types-ex
 version:        0.1.0.0
@@ -21,6 +21,7 @@ extra-source-files:
 
 library
   exposed-modules:
+      Chapter10
       Chapter5
       Chapter6
       Chapter7
