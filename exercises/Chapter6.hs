@@ -26,3 +26,9 @@ instance Applicative Cont where
 -- Exercise 6.4.iii
 instance Monad Cont where
   Cont a >>= f = Cont $ \callback -> a $ \b -> unCont (f b) callback
+
+-- Exercise 6.4.iv
+newtype ContT m a = ContT { runContT :: forall r. (a -> m r) -> m r }
+
+instance Functor (ContT m) where
+  fmap f (ContT c) = ContT $ \callback -> c (callback . f)
