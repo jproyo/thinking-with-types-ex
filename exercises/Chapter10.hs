@@ -34,5 +34,11 @@ data ListToMaybeT :: [a] -> Exp (Maybe a)
 type instance EvalT (ListToMaybeT '[]) = 'Nothing
 type instance EvalT (ListToMaybeT (x ': _)) = 'Just x
 
+-- Exercise 10.2.ii
+data FoldR :: (a -> b -> Exp b) -> b -> [a] -> Exp [b]
+type instance EvalT (FoldR _ _ '[]) = '[]
+type instance EvalT (FoldR f b (a ': as)) = EvalT (FoldR f (EvalT (f b a)) as)
 
+data ConsR :: a -> b -> Exp a
+type instance EvalT (ConsR a _) = a
 
