@@ -13,10 +13,13 @@ import           Test.Hspec
 spec :: Spec
 spec =
   describe "Chapter10" $ do
-    it "EvalT ListToMaybeT" $ do
-      testListToMaybeT `shouldBe` Refl
+    it "EvalT ListToMaybeT true" $ testListToMaybeT `shouldBe` Refl
+    it "EvalT ListToMaybeT false" $ testListToMaybeTFalse `shouldBe` Refl
 
 
-testListToMaybeT :: (EvalT (ListToMaybeT '[1])) :~: 'Just 1
+testListToMaybeT :: ((EvalT (ListToMaybeT '[1])) == 'Just 1) :~: 'True
 testListToMaybeT = Refl
+
+testListToMaybeTFalse :: ((EvalT (ListToMaybeT '[])) == 'Just 1) :~: 'False
+testListToMaybeTFalse = Refl
 
