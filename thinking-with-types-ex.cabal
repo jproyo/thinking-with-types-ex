@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7209d1cf39120c058a8636f2c3184daa757219c417eee53f4e5cf5e269332227
+-- hash: fe48d98a50c1dc18e08df261ab591634b475c9674c134ea3ef6a5ac531c3e6a0
 
 name:           thinking-with-types-ex
 version:        0.1.0.0
@@ -45,4 +45,26 @@ executable thinking-with-types-ex
   ghc-options: -fshow-hole-constraints -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -Wno-unticked-promoted-constructors
   build-depends:
       base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Chapter10
+      Chapter5
+      Chapter6
+      Chapter7
+      Chapter5Spec
+      Paths_thinking_with_types_ex
+  hs-source-dirs:
+      exercises
+      test
+  default-extensions: OverloadedStrings StandaloneDeriving
+  ghc-options: -fshow-hole-constraints -Wall -Wcompat -Wincomplete-record-updates -Wincomplete-uni-patterns -Wredundant-constraints -Wno-unticked-promoted-constructors -threaded -O2 -rtsopts -with-rtsopts=-N
+  build-depends:
+      QuickCheck
+    , base >=4.7 && <5
+    , hspec ==2.*
+    , hspec-expectations-lifted
   default-language: Haskell2010

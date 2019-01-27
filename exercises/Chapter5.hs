@@ -71,26 +71,3 @@ instance All Show ts => Show (HList ts) where
   show HNil = "HNil"
   show (a :# as) = show a <> " :# " <> show as
 
-testDataTwoElem :: HList '[Maybe Integer, Bool]
-testDataTwoElem = Just 1 :# True :# HNil
-
-testDataTwoElemWithGreaterMaybe :: HList '[Maybe Integer, Bool]
-testDataTwoElemWithGreaterMaybe = Just 2 :# True :# HNil
-
-testDataOtherTwoElem :: HList '[Maybe a, Bool]
-testDataOtherTwoElem = Nothing :# True :# HNil
-
-testAllShow :: String
-testAllShow = show testDataTwoElem
-
-testEqTrue :: Bool
-testEqTrue = testDataTwoElem == testDataTwoElem
-
-testEqFalse :: Bool
-testEqFalse = testDataTwoElem == testDataOtherTwoElem
-
-testGreaterThan :: Bool
-testGreaterThan = testDataTwoElemWithGreaterMaybe > testDataTwoElem
-
-testLessThan :: Bool
-testLessThan = testDataTwoElem < testDataTwoElemWithGreaterMaybe 
