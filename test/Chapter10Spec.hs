@@ -13,8 +13,13 @@ import           Test.Hspec
 spec :: Spec
 spec =
   describe "Chapter10" $ do
-    it "EvalT ListToMaybeT true" $ testListToMaybeT `shouldBe` Refl
-    it "EvalT ListToMaybeT false" $ testListToMaybeTFalse `shouldBe` Refl
+    it "Defunctionalise ListToMaybe type" $ do
+      eval (ListToMaybe @Integer [1, 2, 3]) `shouldBe` Just 1
+      eval (ListToMaybe @Integer []) `shouldBe` Nothing
+    it "Defunctionalise ListToMaybeT true" $ testListToMaybeT `shouldBe` Refl
+    it "Defunctionalise ListToMaybeT false" $ testListToMaybeTFalse `shouldBe` Refl
+    it "Defunctionalise FoldR true" $ testFoldR `shouldBe` Refl
+    it "Defunctionalise FoldR false" $ testFoldRFalse `shouldBe` Refl
 
 
 testListToMaybeT :: ((EvalT (ListToMaybeT '[1])) == 'Just 1) :~: 'True
@@ -22,4 +27,11 @@ testListToMaybeT = Refl
 
 testListToMaybeTFalse :: ((EvalT (ListToMaybeT '[])) == 'Just 1) :~: 'False
 testListToMaybeTFalse = Refl
+
+testFoldR :: ((EvalT (FoldR ConsR 'True '[False, True, False])) == 'False) :~: 'True
+testFoldR = Refl
+
+testFoldRFalse :: ((EvalT (FoldR ConsR 'True '[])) == 'False) :~: 'False
+testFoldRFalse = Refl
+
 
