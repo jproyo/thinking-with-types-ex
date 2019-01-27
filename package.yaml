@@ -51,4 +51,5 @@ tests:
     dependencies:
       - hspec == 2.*
       - hspec-expectations-lifted
+      - mtl
       - QuickCheck

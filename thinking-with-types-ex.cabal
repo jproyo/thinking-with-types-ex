@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: fe48d98a50c1dc18e08df261ab591634b475c9674c134ea3ef6a5ac531c3e6a0
+-- hash: 70c343ce0716d56f2f50cb47964ae0241d4257d3ba0a811380899a550ec30fb2
 
 name:           thinking-with-types-ex
 version:        0.1.0.0
@@ -56,6 +56,7 @@ test-suite spec
       Chapter6
       Chapter7
       Chapter5Spec
+      Chapter6Spec
       Paths_thinking_with_types_ex
   hs-source-dirs:
       exercises
@@ -67,4 +68,5 @@ test-suite spec
     , base >=4.7 && <5
     , hspec ==2.*
     , hspec-expectations-lifted
+    , mtl
   default-language: Haskell2010

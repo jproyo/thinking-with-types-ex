@@ -13,7 +13,7 @@ module Chapter6 where
 
 newtype Cont a = Cont { unCont :: forall r. (a->r) -> r }
 
-
+ 
 -- Exercise 6.4.i
 instance Functor Cont where
   fmap f (Cont c) = Cont $ \callback -> c (callback . f)
