@@ -35,10 +35,15 @@ type instance EvalT (ListToMaybeT '[]) = 'Nothing
 type instance EvalT (ListToMaybeT (x ': _)) = 'Just x
 
 -- Exercise 10.2.ii
-data FoldR :: (a -> b -> Exp b) -> b -> [a] -> Exp [b]
+data FoldR :: (a -> b -> Exp b) -> b -> [a] -> Exp b
 type instance EvalT (FoldR _ _ '[]) = '[]
-type instance EvalT (FoldR f b (a ': as)) = EvalT (FoldR f (EvalT (f b a)) as)
+type instance EvalT (FoldR f b (a ': as)) = EvalT (f a (EvalT (FoldR f b as)))
 
 data ConsR :: a -> b -> Exp a
 type instance EvalT (ConsR a _) = a
+
+data Map :: (a -> Exp b) -> fa -> Exp (fb)
+
+-- Exercise 10.4.i
+type instance EvalT (Map f '(a, b)) = '(a, EvalT (f b))
 
